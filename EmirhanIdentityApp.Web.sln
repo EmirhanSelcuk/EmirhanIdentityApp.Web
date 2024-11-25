@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmirhanIdentityApp.Web", "EmirhanIdentityApp.Web\EmirhanIdentityApp.Web.csproj", "{5D6251B8-91FD-4602-8341-E860B3D4CBAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D6251B8-91FD-4602-8341-E860B3D4CBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D6251B8-91FD-4602-8341-E860B3D4CBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D6251B8-91FD-4602-8341-E860B3D4CBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D6251B8-91FD-4602-8341-E860B3D4CBAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CA9F00D-93AB-40E3-AFDF-59969B5B9BB2}
+	EndGlobalSection
+EndGlobal
