@@ -15,23 +15,27 @@ namespace EmirhanIdentityApp.Web.ViewModels
             Phone = phone;
             Password = password;
         }
+        [Required(ErrorMessage ="Kullanıcı Adı boş bırakalamaz")]
         [Display(Name ="Kullanıcı Adı : ")]
         public string UserName { get; set; }
 
+        [EmailAddress(ErrorMessage ="Email formatı doğru giriniz.")]
+        [Required(ErrorMessage = "Email boş bırakalamaz")]
         [Display(Name = "Email : ")]
-
         public string Email { get; set; }
 
+        [Required(ErrorMessage = " Telefon boş bırakalamaz")]
         [Display(Name = "Telefon  : ")]
-
         public string Phone { get; set; }
 
+        [Required(ErrorMessage = " Şifre boş bırakalamaz")]
         [Display(Name = " Şifre : ")]
-
         public string Password { get; set; }
 
-        [Display(Name = " Şifre Tekrar : ")]
 
+        [Compare(nameof(Password),ErrorMessage ="Şifreler birbirleriyle uyuşmuyor!")]
+        [Required(ErrorMessage = " Şifre boş bırakalamaz")]
+        [Display(Name = " Şifre Tekrar : ")]
         public string PasswordConfirm { get; set; }
     }
 }
