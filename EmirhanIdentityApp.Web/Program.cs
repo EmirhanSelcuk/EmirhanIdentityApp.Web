@@ -1,6 +1,9 @@
 using EmirhanIdentityApp.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using EmirhanIdentityApp.Web.Extensions;
+using Microsoft.AspNetCore.Identity;
+using EmirhanIdentityApp.Web.OptionsModel;
+using EmirhanIdentityApp.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,13 +14,22 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
 });
 
+
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.FromMinutes(30);
+});
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
 builder.Services.AddIdentityWithExtensions();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {
     var cookieBuilder = new CookieBuilder();
     cookieBuilder.Name = "EmirhanCookie";
     opt.LoginPath = new PathString("/Home/Signin");
+    opt.LogoutPath = new PathString("/Member/logout");
     opt.Cookie = cookieBuilder;
     opt.ExpireTimeSpan = TimeSpan.FromDays(60);
     opt.SlidingExpiration = true;
@@ -39,6 +51,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 
