@@ -1,4 +1,6 @@
-﻿using EmirhanIdentityApp.Web.Models;
+﻿using EmirhanIdentityApp.Web.CustomValidations;
+using EmirhanIdentityApp.Web.Localizations;
+using EmirhanIdentityApp.Web.Models;
 
 namespace EmirhanIdentityApp.Web.Extensions
 {
@@ -16,7 +18,13 @@ namespace EmirhanIdentityApp.Web.Extensions
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
 
-            }).AddEntityFrameworkStores<AppDbContext>();
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+
+            }).AddPasswordValidator<PasswordValidator>()
+            .AddUserValidator<UserValidator>()
+            .AddErrorDescriber<LocalizationIdentityErrorDescriber>()
+            .AddEntityFrameworkStores<AppDbContext>();
         }
     }
 }
