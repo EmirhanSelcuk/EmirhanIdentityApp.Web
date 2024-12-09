@@ -1,6 +1,8 @@
-﻿using EmirhanIdentityApp.Web.Models;
+﻿using EmirhanIdentityApp.Web.Areas.Admin.Models;
+using EmirhanIdentityApp.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using EmirhanIdentityApp.Web.Extensions;
 
 namespace EmirhanIdentityApp.Web.Areas.Admin.Controllers
 {
@@ -20,6 +22,25 @@ namespace EmirhanIdentityApp.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult RoleCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RoleCreate(RoleCreateViewModel request)
+        {
+            var result = await _roleManager.CreateAsync(new AppRole() { Name = request.Name });
+
+            if(!result.Succeeded)
+            {
+                ModelState.AddModelErrorList(result.Errors);
+                return View();
+            }
+
+            return RedirectToAction(nameof(RolesController.Index));
         }
     }
 }
