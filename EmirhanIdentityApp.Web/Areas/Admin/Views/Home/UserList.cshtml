@@ -2,7 +2,27 @@
     ViewData["Title"] = "UserList";
 }
 @model List<AdminModel.UserViewModel>
-<h1>Kullanıcı Listesi</h1>
+
+
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-end mb-3">
+        <form asp-action="UserList" asp-controller="Home" method="get" class="form-inline">
+            <div class="input-group">
+                <input name="searchUser" class="form-control" type="search" placeholder="Kullanıcı Ara" value="@ViewData["CurrentFilter"]" />
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit">Ara</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewData["NoUsersFound"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewData["NoUsersFound"]
+    </div>
+}
 
 <table class="table table-striped">
     <thead>
@@ -10,6 +30,8 @@
             <th>Kullanıcı Adı</th>
             <th>Email</th>
             <th>Id</th>
+            <th>Roller</th>
+            <th>Rol İşlemleri</th>
         </tr>
     </thead>
 
@@ -20,8 +42,16 @@
                 <td>@item.Name</td>
                 <td>@item.Email</td>
                 <td>@item.Id</td>
+                <td>
+                    <user-role-names user-id="@item.Id"></user-role-names>
+                </td>
+                <td>
+                    <a asp-controller="Roles" asp-action="AssignRoleToUser" asp-route-id="@item.Id">Rol Ata</a>
+                </td>
             </tr>
         }
+       
+      
 
 
 
